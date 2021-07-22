@@ -1,9 +1,25 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Illuminate\Support\Arr;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure;
 
+/*protected function handle($request, Closure $next, $guard = null)
+{
+    if (Auth::guard($guard)->guest()) {
+        if (! $request->expectsJson()) {
+            return response('Unauthorized', 401);
+        }
+        else {
+            return redirect()->route('home');
+        }
+    }
+
+
+    return $next($request);
+}
+}*/
 class Authenticate extends Middleware
 {
     /**
@@ -12,10 +28,12 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function redirectTo($request)
-    {
+    protected function redirectTo($request) {
         if (! $request->expectsJson()) {
-            return route('login');
+                return route('home');
+            }
+        else {
+                return redirect()->route('dashboard');
+            }
         }
-    }
 }

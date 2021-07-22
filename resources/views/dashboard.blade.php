@@ -1,1 +1,3 @@
-<h1> The Dashboard</h1>
+@extends('layouts.master')
+
+
