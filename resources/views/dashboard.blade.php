@@ -26,40 +26,24 @@
                     What others mdxHub users are saying...
                 </h3>
             </header>
-            <article class="post">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus luctus nunc non consectetur convallis.
-                    Curabitur a scelerisque quam. Proin in auctor massa, quis finibus quam.
-                    Pellentesque scelerisque efficitur auctor.
-                </p>
-                <div class="info">
-                    Posted by Max on 12 Feb 016
-                </div>
-                <div class="interaction">
-                    <a href="#">Like</a> |
-                    <a href="#">Dislike</a> |
-                    <a href="#"> Comment</a> |
-                    <a href="#">Edit</a> |
-                    <a href="#">Delete</a>
-                </div>
-            </article>
-            <article class="post">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus luctus nunc non consectetur convallis.
-                    Curabitur a scelerisque quam. Proin in auctor massa, quis finibus quam.
-                    Pellentesque scelerisque efficitur auctor.
-                </p>
-                <div class="info">
-                    Posted by Max on 12 Feb 016
-                </div>
-                <div class="interaction">
-                    <a href="#">Like</a> |
-                    <a href="#">Dislike</a> |
-                    <a href="#"> Comment</a> |
-                    <a href="#">Edit</a> |
-                    <a href="#">Delete</a>
-                </div>
-            </article>
+            @foreach($posts as $post)
+                <article class="post">
+                    <p>
+                        {{$post->body}}
+                    </p>
+                    <div class="info">
+                        Posted by {{ $post->user->first_name }} on {{ $post->created_at }} to <a href="#">{{$post->network}}</a> .
+                    </div>
+                    <div class="interaction">
+                        <a href="#">Like</a> |
+                        <a href="#">Dislike</a> |
+                        <a href="#">Comment</a> |
+                        <a href="#">Edit</a> |
+                        <a href="#">Delete</a>
+                    </div>
+                </article>
+            @endforeach
+
         </div>
     </section>
 @endsection
