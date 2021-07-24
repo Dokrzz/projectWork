@@ -4,7 +4,6 @@
     Account
 @endsection
 
-
 @section('main')
     <section class="row new-post">
         <div class="col-md-6 col-md-offset-3">
@@ -13,10 +12,6 @@
                 <div class="form-group">
                     <label for="first_name">First Name</label>
                     <input type="text" name="first_name" class="form-control" value="{{ $user->first_name }}" id="first_name">
-                    <label for="first_name">First Name</label>
-                    <input type="text" name="last_name" class="form-control" value="{{ $user->last_name }}" id="first_name">
-                    <label for="first_name">First Name</label>
-                    <input type="text" name="course" class="form-control" value="{{ $user->course }}" id="course">
                 </div>
                 <div class="form-group">
                     <label for="image">Image (only .jpg)</label>
