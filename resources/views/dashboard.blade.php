@@ -28,7 +28,11 @@
             </header>
             @foreach($posts as $post)
                 <article class="post" data-postid="{{$post->id}}">
-                    <p>{{$post->body}}</p>
+                    <p>
+                        <a href="/show/{{$post->id}}">
+                            {{$post->body}}
+                        </a>
+                    </p>
                     <div class="info">
                         Posted by {{ $post->user->first_name }} on {{ $post->created_at }} to <a href="#">{{$post->network}}</a> .
                     </div>

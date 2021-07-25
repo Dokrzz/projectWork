@@ -85,4 +85,11 @@ class PostController extends Controller {
         }
         return null;
     }
+
+    public function show(Post $posts) {
+        return view('show', [
+            'post' => $posts
+        ]);
+
+    }
 }

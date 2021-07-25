@@ -112,4 +112,9 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'search'
     ]);
 
+    Route::get('/show/{$posts}', [
+        'uses' => 'PostController@show',
+        'as' => "show"
+    ]);
+
 });
