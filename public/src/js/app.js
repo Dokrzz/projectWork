@@ -1,5 +1,12 @@
 var postId = 0;
-var postBodyElement = null
+var eventId=0;
+var postBodyElement = null;
+var postNameElement = null;
+var postDescriptionElement = null;
+var postDateElement = null;
+
+var temp = null
+
 $('.post').find('.interaction').find('.edit').on('click', function (event) {
     event.preventDefault();
 
@@ -7,6 +14,25 @@ $('.post').find('.interaction').find('.edit').on('click', function (event) {
     var postBody = postBodyElement.textContent;
     postId = event.target.parentNode.parentNode.dataset['postid'];
     $('#post-body').val(postBody);
+    $('#edit-modal').modal();
+})
+
+$('.event').find('.interaction').find('.edit').on('click', function (event) {
+    event.preventDefault();
+
+    postNameElement = event.target.parentNode.parentNode.childNodes[1];
+    postDescriptionElement = event.target.parentNode.parentNode.childNodes[3];
+    postDateElement = event.target.parentNode.parentNode.childNodes[5];
+    console.log(event.target.parentNode.parentNode.childNodes);
+    var postName = postNameElement.textContent;
+    var postDescription = postDescriptionElement.textContent;
+    var postDate = postDateElement.textContent;``
+
+    eventId = event.target.parentNode.parentNode.dataset['eventid'];
+
+    $('#post-name').val(postName);
+    $('#post-description').val(postDescription);
+    $('#post-date').val(postDate);
     $('#edit-modal').modal();
 });
 
@@ -18,6 +44,21 @@ $('#modal-save').on('click', function () {
         })
         .done(function(msg) {
             $(postBodyElement).text(msg['new_body']);
+            $('#edit-modal').modal('hide');
+        });
+});
+
+$('#modal-save-event').on('click', function () {
+    $.ajax({
+        method: 'POST',
+        url: urlEditEvent,
+        data: {description: $('#post-description').val(), name: $('#post-name').val, date: $('#post-date').val,
+            eventId: eventId, _token: token}
+    })
+        .done(function(msg) {
+            $(postDescriptionElement).text(msg['new_description']);
+            $(postNameElement).text(msg['new_name']);
+            $(postDateElement).text(msg['new_date']);
             $('#edit-modal').modal('hide');
         });
 });

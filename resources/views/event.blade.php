@@ -8,12 +8,14 @@
             <header>
                 <h3>What do you have to say?</h3>
             </header>
-            <form action="{{ route('post.create') }}" method="post">
+            <form action="{{ route('event.create') }}" method="post">
                 <div class="form-group">
-                    <textarea class = "form-control" name="body" id="new-post" rows="5" placeholder="Your Post..."></textarea>
+                    <input type="text" class="form-control" name="name" id="new-post" placeholder="Your Event Name">
+                    <textarea class = "form-control" name="description" id="new-post" rows="5" placeholder="Description"></textarea>
                     <textarea class = "form-control" name="network" id="new-post" rows="5" placeholder="Your Network"></textarea>
+                    <input type="date" class="form-control" name="date" id="new-post">
                 </div>
-                <button type="submit" class="btn btn-primary">Post!</button>
+                <button type="submit" class="btn btn-primary">Create Event!</button>
                 <input type="hidden" value="{{ Session::token() }}" name="_token">
             </form>
         </div>
@@ -23,24 +25,21 @@
         <div class="col-md-6 col-md-offset-3">
             <header>
                 <h3>
-                    What others mdxHub users are saying...
+                    What events are other mdxHub users attending...
                 </h3>
             </header>
-            @foreach($posts as $post)
-                <article class="post" data-postid="{{$post->id}}">
-                    <p>{{$post->body}}</p>
+            @foreach($events as $event)
+                <article class="event" data-eventid="{{$event->id}}">
+                    <p>{{$event->name}}</p>
+                    <p>{{$event->description}}</p>
+                    <p>{{$event->date}}</p>
                     <div class="info">
-                        Posted by {{ $post->user->first_name }} on {{ $post->created_at }} to <a href="#">{{$post->network}}</a> .
+                        Posted by {{ $event->user->first_name }} on {{ $event->created_at }} to <a href="#">{{$event->network}}</a> .
                     </div>
                     <div class="interaction">
-                        <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> |
-                        <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You don\'t like this post' : 'Dislike' : 'Dislike'  }}</a> |
-                        <a href="#">Comment</a>
-                        @if(Auth::user() == $post->user)
-                            |
-                            <a href="#" class="edit">Edit</a> |
-                            <a href="{{ route('post.delete', ['post_id' => $post->id])  }}">Delete</a>
-                        @endif
+{{--                    <a href="#" class="like">{{ Auth::user()->event()->where('id', $event->id)->first() ? Auth::user()->attend()->where('event_id', $event->id)->first()->attend == 1 ? 'You\'re attending' : 'Attending?' : 'Attending'  }}</a> |*/--}}
+                        <a href="#" class="edit">Edit</a> |
+                        <a href="{{ route('event.delete', ['event_id' => $event->id])  }}">Delete</a>
                     </div>
                 </article>
             @endforeach
@@ -53,29 +52,27 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Edit Post</h4>
+                    <h4 class="modal-title">Edit Event</h4>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
                             <label for="post-body"> Edit the post</label>
-                            <textarea class="form-control" name="post-body" id="post-body" rows="5">
-
-                            </textarea>
+                            <input type="text" class="form-control" name="name" id="post-name" placeholder="Your Event Name">
+                            <textarea class="form-control" name="post-description" id="post-description" rows="5"></textarea>
+                            <input type="date" class="form-control" name="date" id="post-date">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="modal-save">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="modal-save-event">Save changes</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
     <script>
         var token = '{{ Session::token() }}';
-        var urlEdit = '{{route('edit')}}';
-        var urlLike = '{{ route('like') }}';
+        var urlEditEvent = '{{route('edit-event')}}';
     </script>
 @endsection

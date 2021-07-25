@@ -69,6 +69,23 @@ Route::group(['middleware' => ['web']], function () {
         'middleware' => 'auth'
     ]);
 
+    Route::get('/event', [
+        'uses' => 'EventController@getEvent',
+        'as' => 'event'
+    ]);
+
+    Route::post('/createevent', [
+        'uses' => 'EventController@postCreateEvent',
+        'as' => 'event.create',
+        'middleware' => 'auth'
+    ]);
+
+    Route::get('/delete-event/{event_id}', [
+        'uses' => 'EventController@getDeleteEvent',
+        'as' => 'event.delete',
+        'middleware' => 'auth'
+    ]);
+
     Route::get('/delete-post/{post_id}', [
         'uses' => 'PostController@getDeletePost',
         'as' => 'post.delete',
@@ -78,6 +95,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/edit', [
         'uses' => 'PostController@postEditPost',
         'as' => 'edit'
+    ]);
+
+    Route::post('/edit-event', [
+        'uses' => 'EventController@postEditEvent',
+        'as' => 'edit-event'
     ]);
 
     Route::post('/like', [
