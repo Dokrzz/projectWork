@@ -107,4 +107,9 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'like'
     ]);
 
+    Route::get('/search', [
+        'uses' => 'SearchController@search',
+        'as' => 'search'
+    ]);
+
 });

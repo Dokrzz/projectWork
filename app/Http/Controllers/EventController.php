@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class EventController extends Controller {
+
+    public function search(Request $request) {
+        $search = $request->input('search');
+    }
     public function postCreateEvent(Request $request) {
         // Validation
 

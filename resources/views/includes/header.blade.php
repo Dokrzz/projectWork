@@ -15,6 +15,14 @@
             <!-- Collect the nav links, forms and other content for togglnig -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form action="{{route('search')}}" method="get">
+                            <input class="form-control" type="text" name="search" required>
+                            <button class="btn btn-primary" type="submit">Search...</button>
+                        </form>
+                    </li>
+                    <li></li>
+                    <li><a href="{{route('event')}}">Events</a></li>
                     <li><a href="{{route('account')}}">Account</a></li>
                     <li><a href="{{route('logout')}}">Logout</a></li>
                 </ul>

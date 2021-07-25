@@ -52,13 +52,14 @@ $('#modal-save-event').on('click', function () {
     $.ajax({
         method: 'POST',
         url: urlEditEvent,
-        data: {description: $('#post-description').val(), name: $('#post-name').val, date: $('#post-date').val,
+        data: {name: $('#post-name').val(), description: $('#post-description').val(), date: $('#post-date').val(),
             eventId: eventId, _token: token}
     })
         .done(function(msg) {
             $(postDescriptionElement).text(msg['new_description']);
             $(postNameElement).text(msg['new_name']);
             $(postDateElement).text(msg['new_date']);
+            console.log(msg)
             $('#edit-modal').modal('hide');
         });
 });

@@ -6,7 +6,7 @@
     <section class="row new-post">
         <div class="col-md-6 col-md-offset-3">
             <header>
-                <h3>What do you have to say?</h3>
+                <h3>Create an Event!</h3>
             </header>
             <form action="{{ route('event.create') }}" method="post">
                 <div class="form-group">
