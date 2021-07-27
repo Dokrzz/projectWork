@@ -6,14 +6,14 @@
     <section class="row new-post">
         <div class="col-md-6 col-md-offset-3">
             <header>
-                <h3>What do you have to say?</h3>
+                <h3>Create a post</h3>
             </header>
             <form action="{{ route('post.create') }}" method="post">
                 <div class="form-group">
-                    <textarea class = "form-control" name="body" id="new-post" rows="5" placeholder="Your Post..."></textarea>
-                    <textarea class = "form-control" name="network" id="new-post" rows="5" placeholder="Your Network"></textarea>
+                    <textarea class = "form-control" name="body" id="new-post" rows="5" placeholder="Create a post for users to see"></textarea>
+                    <textarea class = "form-control" name="network" id="new-post" rows="5" placeholder="Choose a network for the post to appear"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Post!</button>
+                <button type="submit" class="btn btn-primary">Send</button>
                 <input type="hidden" value="{{ Session::token() }}" name="_token">
             </form>
         </div>
@@ -34,17 +34,14 @@
                         </a>
                     </p>
                     <div class="info">
-                        Posted by {{ $post->user->first_name }} on {{ $post->created_at }} to <a href="#" {{$post->network}}</a> .
+                        Posted by {{ $post->user->first_name }} with user id: {{$post->user->id}} on {{ $post->created_at }} to <a href="#">{{$post->network}}</a> .
                     </div>
                     <div class="interaction">
                         <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> |
                         <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You don\'t like this post' : 'Dislike' : 'Dislike'  }}</a> |
-                        <a href="#">Comment</a>
-                        @if(Auth::user() == $post->user)
-                            |
-                            <a href="#" class="edit">Edit</a> |
-                            <a href="{{ route('post.delete', ['post_id' => $post->id])  }}">Delete</a>
-                        @endif
+                        <a href="#">Comment</a> |
+                        <a href="#" class="edit">Edit</a> |
+                        <a href="{{ route('post.delete', ['post_id' => $post->id])  }}">Delete</a>
                     </div>
                 </article>
             @endforeach

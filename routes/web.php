@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +34,21 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'signup'
     ]);
 
+
+
     Route::post('/signin', [
         'uses' => 'UserController@postSignIn',
         'as' => 'signin'
+    ]);
+
+    Route::post('/signinadmin',[
+        'uses' => 'AdminController@postSignin',
+        'as' => 'signinadmin'
+    ]);
+
+    Route::get('/admin', [
+        'uses' => 'AdminController@getDashboard',
+        'as' => 'admin'
     ]);
 
     Route::get('/logout', [
@@ -72,6 +86,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/event', [
         'uses' => 'EventController@getEvent',
         'as' => 'event'
+    ]);
+
+    Route::get('/admin/admin-portal', [
+        'uses' => 'AdminController@getAdminPortal',
+        'as' => 'admin-portal'
     ]);
 
     Route::post('/createevent', [
