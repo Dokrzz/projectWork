@@ -1,9 +1,7 @@
 <?php
 
 return [
-    'key' => env('APP_KEY', 'SomeRandomStringSomeRandomString'),
-
-
+    'key' => env('APP_KEY', 'base64:1T1cd0wCesOert4peO9iH8HH45M5TpoL2hs+At/KUGI='),
     /*
     |--------------------------------------------------------------------------
     | Application Name
